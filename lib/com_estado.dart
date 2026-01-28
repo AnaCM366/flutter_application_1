@@ -45,6 +45,9 @@ class _ComEstadoState extends State<ComEstado> {
             // viewMode = value ? 1 : 0;
           });
         });
+    if (isLoading == true) {
+      return CircularProgressIndicator.adaptative();
+    }
 
     if (viewMode == 0) {
       return Column(
