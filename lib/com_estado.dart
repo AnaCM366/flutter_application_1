@@ -12,45 +12,45 @@ class _ComEstadoState extends State<ComEstado> {
   int viewMode = 0;
   bool isLoading = true;
 
- @override
- void initState() {
-  // TODO: implement iniState
+  @override
+  void initState() {
+    // TODO: implement iniState
     super.initState();
-    Future.delayed(const Duration(seconds: 2)).then(
-      (value) {
+    Future.delayed(const Duration(seconds: 2)).then((value) {
       setState(() {
         isLoading = false;
       });
     });
   }
 
-@override
+  @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     Widget switchViewMode = Switch.adaptive(
-        value: viewMode == 1,
-        onChanged: (value) {
-          setState(() {
-            if (value) {
-              viewMode = 1;
-            } else {
-              viewMode = 0;
-            }
-            // viewMode = value ? 1 : 0;
-          });
+      value: viewMode == 1,
+      onChanged: (value) {
+        setState(() {
+          if (value) {
+            viewMode = 1;
+          } else {
+            viewMode = 0;
+          }
+          // viewMode = value ? 1 : 0;
         });
-    if (isLoading == true) {
-      return CircularProgressIndicator.adaptative();
-    }
+      },
+    );
+    // if (isLoading == true) {
+    //   return CircularProgressIndicator.adaptative();
+    // }
 
     if (viewMode == 0) {
       return Column(
+        children: [
           Row(
             spacing: 8,
             children: [
