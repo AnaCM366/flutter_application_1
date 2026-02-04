@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/carrinho.dart';
-import 'package:flutter_application_1/my_home_page.dart';
+import 'package:flutter_application_1/my_change_notifer.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   // final int a = 0;
   // a = 1;
 
-  const a = 0;
+  // const a = 0;
 
-  runApp(const MyApp());
+  // var a = 0;
+  // print('tipo da variável a ${a.runtimeType}');
+  // print('1 + 1 ${1 + 1}');
+  // print('$a');
+
+  // int b = 1;
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => MyChangeNotifer(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,6 +39,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: Colors.deepPurple),
       ),
+      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       home: Carrinho(),
     );
   }

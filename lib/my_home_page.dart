@@ -4,7 +4,6 @@ import 'package:flutter_application_1/sem_estado.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
-
   final String title;
 
   @override
@@ -31,14 +30,14 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: .center,
           children: [
-            // const Text('You have pushed the button this many times:'),
-            // Text(
-            //   '$_counter',
-            //   style: Theme.of(context).textTheme.headlineMedium,
-            // ),
-            // SemEstado(data: "Ana"),
-            // SemEstado(data: "Carolina"),
-            // SemEstado(data: "Machado"),
+            const Text('You have pushed the button this many times:'),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+            SemEstado(data: "Guilherme"),
+            SemEstado(data: "Gabriel"),
+            SemEstado(data: "Miguel"),
             ComEstado(),
           ],
         ),

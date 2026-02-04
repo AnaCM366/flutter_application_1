@@ -14,13 +14,15 @@ class _ComEstadoState extends State<ComEstado> {
 
   @override
   void initState() {
-    // TODO: implement iniState
+    // TODO: implement initState
     super.initState();
-    Future.delayed(const Duration(seconds: 2)).then((value) {
-      setState(() {
-        isLoading = false;
-      });
-    });
+    Future.delayed(const Duration(seconds: 2)).then(
+      (value) {
+        setState(() {
+          isLoading = false;
+        });
+      },
+    );
   }
 
   @override
@@ -35,59 +37,49 @@ class _ComEstadoState extends State<ComEstado> {
       value: viewMode == 1,
       onChanged: (value) {
         setState(() {
+          // viewMode = value == true ? 1 : 0;
           if (value) {
             viewMode = 1;
           } else {
             viewMode = 0;
           }
-          // viewMode = value ? 1 : 0;
         });
       },
     );
-    // if (isLoading == true) {
-    //   return CircularProgressIndicator.adaptative();
-    // }
-
+    List<Widget> children = [
+      Text('Valor da contagem'),
+      Text(contador.toString()),
+      ElevatedButton(
+        onPressed: () {
+          // contador = contador + 1;
+          setState(() {
+            contador++;
+          });
+        },
+        child: Text(
+          'Incrementar',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
+    ];
+    if (isLoading == true) {
+      return CircularProgressIndicator.adaptive();
+    }
     if (viewMode == 0) {
       return Column(
         children: [
+          switchViewMode,
           Row(
             spacing: 8,
-            children: [
-              Text('Valor da contagem'),
-              Text(contador.toString()),
-              ElevatedButton(
-                onPressed: () {
-                  // contador = contador + 1;
-                  setState(() {
-                    contador++;
-                  });
-                },
-                child: Text(
-                  'Incrementar',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-              ),
-            ],
+            children: children,
           ),
         ],
       );
     } else {
       return Column(
+        spacing: 8,
         children: [
-          Switch.adaptive(
-            value: viewMode == 1,
-            onChanged: (value) {
-              setState(() {
-                if (value == true) {
-                  viewMode = 1;
-                } else {
-                  viewMode = 0;
-                }
-                // viewMode = value ? 1 : 0;
-              });
-            },
-          ),
+          switchViewMode,
           Text('Valor da contagem'),
           Text(contador.toString()),
           ElevatedButton(
