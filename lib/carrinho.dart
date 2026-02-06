@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/carrinho2.dart';
 import 'package:flutter_application_1/my_change_notifer.dart';
 import 'package:provider/provider.dart';
 
@@ -65,54 +66,77 @@ class _CarrinhoState extends State<Carrinho> {
           ),
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         ),
-        body: GridView.count(
-          childAspectRatio: myChangeNotifier.childAspectRatio,
-          crossAxisCount: 2,
-          children: myChangeNotifier.produtos.map(
-            (e) {
-              // return Text(e.descricao);
-              final bool produtoPresenteNoCarrinho = myChangeNotifier
-                  .produtosCarrinho //
-                  .where((element) => element.id == e.id)
-                  .isNotEmpty;
-              return LayoutBuilder(
-                builder: (context, constraints) => GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      produtoPresenteNoCarrinho ? myChangeNotifier.produtosCarrinho.remove(e) : myChangeNotifier.produtosCarrinho.add(e);
-                    });
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.blue),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      spacing: 8.0,
-                      children: [
-                        Text('Largura do componente: ${constraints.maxWidth}'),
-                        Text('Altura do componente: ${constraints.maxHeight}'),
-                        Text(
-                          e.id.toString(),
-                          style: estiloTextos,
-                        ),
-                        Text(
-                          e.descricao,
-                          style: estiloTextos,
-                        ),
-                        Text(
-                          e.preco.toStringAsFixed(2),
-                          style: estiloTextos,
-                        ),
-                        produtoPresenteNoCarrinho ? Icon(Icons.check, color: Colors.green) : Icon(Icons.cancel, color: Colors.red),
-                      ],
-                    ),
-                  ),
+        body: Column(
+          children: [
+            ElevatedButton(
+              // onPressed: () => Navigator.of(context).push(
+              //   MaterialPageRoute(
+              //     builder: (context) => Carrinho2(),
+              //   ),
+              // ),
+              onPressed: () => Navigator.of(context).pushNamed('/carrinho2'),
+              child: Text('Navegar Carrinho 2 (push)'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => Carrinho2(),
                 ),
-              );
-            },
-          ).toList(),
+              ),
+              child: Text("Navegar Carrinho 2 (push replacement)"),
+            ),
+            Expanded(
+              child: GridView.count(
+                childAspectRatio: myChangeNotifier.childAspectRatio,
+                crossAxisCount: 2,
+                children: myChangeNotifier.produtos.map(
+                  (e) {
+                    // return Text(e.descricao);
+                    final bool produtoPresenteNoCarrinho = myChangeNotifier
+                        .produtosCarrinho //
+                        .where((element) => element.id == e.id)
+                        .isNotEmpty;
+                    return LayoutBuilder(
+                      builder: (context, constraints) => GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            produtoPresenteNoCarrinho ? myChangeNotifier.produtosCarrinho.remove(e) : myChangeNotifier.produtosCarrinho.add(e);
+                          });
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.blue),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            spacing: 8.0,
+                            children: [
+                              Text('Largura do componente: ${constraints.maxWidth}'),
+                              Text('Altura do componente: ${constraints.maxHeight}'),
+                              Text(
+                                e.id.toString(),
+                                style: estiloTextos,
+                              ),
+                              Text(
+                                e.descricao,
+                                style: estiloTextos,
+                              ),
+                              Text(
+                                e.preco.toStringAsFixed(2),
+                                style: estiloTextos,
+                              ),
+                              produtoPresenteNoCarrinho ? Icon(Icons.check, color: Colors.green) : Icon(Icons.cancel, color: Colors.red),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ).toList(),
+              ),
+            ),
+          ],
         ),
       ),
     );
