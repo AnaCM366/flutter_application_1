@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/carrinho2.dart';
+import 'package:flutter_application_1/carrinho2_arguments.dart';
 import 'package:flutter_application_1/my_change_notifer.dart';
 import 'package:provider/provider.dart';
 
@@ -78,9 +79,10 @@ class _CarrinhoState extends State<Carrinho> {
               child: Text('Navegar Carrinho 2 (push)'),
             ),
             ElevatedButton(
-              onPressed: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => Carrinho2(),
+              onPressed: () => Navigator.of(context).pushReplacementNamed(
+                '/carrinho2',
+                arguments: Carrinho2Arguments(
+                  totalProdutosCarrinho: myChangeNotifier.produtosCarrinho.length,
                 ),
               ),
               child: Text("Navegar Carrinho 2 (push replacement)"),
