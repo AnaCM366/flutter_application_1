@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/carrinho.dart';
 import 'package:flutter_application_1/carrinho2.dart';
 import 'package:flutter_application_1/carrinho2_arguments.dart';
+import 'package:flutter_application_1/formulario_produto.dart';
 import 'package:flutter_application_1/my_change_notifer.dart';
 import 'package:provider/provider.dart';
 
@@ -48,6 +49,13 @@ class MyApp extends StatelessWidget {
       //   '/carrinho2': (context) => Carrinho2(),
       // },
       onGenerateRoute: (settings) {
+        if (settings.name == '/') {
+          return MaterialPageRoute(
+            builder: (context) {
+              return Carrinho();
+            },
+          );
+        }
         if (settings.name == '/carrinho2') {
           final args = settings.arguments as Carrinho2Arguments;
 
@@ -56,6 +64,13 @@ class MyApp extends StatelessWidget {
               return Carrinho2(
                 totalProdutosCarrinho: args.totalProdutosCarrinho,
               );
+            },
+          );
+        }
+        if (settings.name == '/formulario-produto') {
+          return MaterialPageRoute(
+            builder: (context) {
+              return FormularioProduto();
             },
           );
         }
