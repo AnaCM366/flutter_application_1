@@ -5,8 +5,15 @@ import 'package:flutter_application_1/carrinho2_arguments.dart';
 import 'package:flutter_application_1/formulario_produto.dart';
 import 'package:flutter_application_1/my_change_notifer.dart';
 import 'package:provider/provider.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Supabase.initialize(
+    url: 'https://ktxjilucrbbgscdqznwz.supabase.co',
+    anonKey: 'sb_publishable_V-4Y-XaTIrHrbnMbwKWtHA_rowQON7u',
+  );
+
   // final int a = 0;
   // a = 1;
 

@@ -13,6 +13,17 @@ class Carrinho extends StatefulWidget {
 
 class _CarrinhoState extends State<Carrinho> {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (timeStamp) {
+        context.read<MyChangeNotifer>().fetchProductsFromSupabase();
+      },
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     MyChangeNotifer myChangeNotifier = context.read();
 

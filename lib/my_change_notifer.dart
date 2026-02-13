@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/produto.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class MyChangeNotifer extends ChangeNotifier {
-  List<Produto> produtos = [
-    Produto(
-      id: 1,
-      descricao: 'produto 1',
-    ),
-    Produto(id: 2, descricao: 'produto 2', preco: 2.0),
-    Produto(id: 3, descricao: 'produto 3', preco: 3.0),
-    Produto(id: 4, descricao: 'produto 4', preco: 4.0),
-  ];
+  List<Produto> produtos = [];
   List<Produto> produtosCarrinho = [];
   double childAspectRatio = 1 / 1;
 
@@ -19,5 +12,29 @@ class MyChangeNotifer extends ChangeNotifier {
       childAspectRatio = value;
       notifyListeners();
     }
+  }
+
+  Future<void> fetchProductsFromSupabase() async {
+    final supabase = Supabase.instance.client;
+    produtos.clear();
+    produtos.addAll(
+      (await supabase.from('produtos').select() as List).map((element) {
+        return Produto(
+          id: element['id'],
+          descricao: element['descricao'],
+          preco: element['preco'],
+        );
+      }).toList(),
+    );
+    notifyListeners();
+  }
+
+  Future<void> insertProductIntoSupabase({required Produto produtos}) async {
+    final supabase = Supabase.instance.client;
+    await supabase.from('produtos').insert({
+      'id': produtos.id,
+      'descricao': produtos.descricao,
+      'preco': produtos.preco,
+    });
   }
 }
